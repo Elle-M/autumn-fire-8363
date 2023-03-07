@@ -32,11 +32,39 @@ RSpec.describe 'plots index' do
     end  
   
     it 'displays list the names of all that plots plants under each plot' do
-      within "#plot_#{@plot1.id}_plants"
+      within "#plot_#{@plot1.id}_plants" do
         expect(page).to have_content("Plants: Purple Beauty Sweet Bell Pepper")
         expect(page).to have_content("Plants: Pumpkin")
         expect(page).to_not have_content("Plant: Cucumber")
       end
     end
+
+    describe 'user story 2' do
+      it 'displays link to remove that plant from that plot' do
+        within "#plot_#{@plot1.id}_plants" do
+        expect(page).to have_content("Plants: Pumpkin")
+        expect(page).to have_content("Plants: Purple Beauty Sweet Bell Pepper")
+       
+        click_link("Remove Plant", match: :first)
+        end
+        
+        expect(page).to_not have_content("Plant: Pumpkin")
+        expect(current_path).to eq(plots_path)
+      end
+    end
+  end  
 end    
+    # User Story 2, Remove a Plant from a Plot
+
+# As a visitor
+# When I visit the plots index page
+# Next to each plant's name
+# I see a link to remove that plant from that plot
+# When I click on that link
+# I'm returned to the plots index page
+# And I no longer see that plant listed under that plot,
+# And I still see that plant's name under other plots that is was associated with.
+
+# Note: you do not need to test for any sad paths or implement any flash messages. 
+# end    
 
