@@ -30,10 +30,10 @@ RSpec.describe 'gardens show' do
     end
 
     it 'displays list that only includes plants that take less than 100 days to harvest' do
-      within "#plot_#{@plot1.id}_plants" do
         expect(page).to have_content("Plants: Purple Beauty Sweet Bell Pepper")
+        expect(page).to have_content("Plants: Carrot")
+        expect(page).to_not have_content("Plant: Pumpkin")
         expect(page).to_not have_content("Plant: Cucumber")
-      end
     end
   end    
   
